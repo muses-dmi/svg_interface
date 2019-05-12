@@ -1,15 +1,29 @@
-# SVG Interface to JSON IR Tool
+#  <span style="color:#F3B73B">SVG Interface to JSON IR Tool</span>
 
-This tool is part of the larger [Muses](https://muses-dmi.github.io/) project.
+SVG interfaces (```.mi``` files) are a simple approach to specifying control
+interfaces for Digitial Musical Instruments or DMIs. SVG Interfaces generate OSC 
+control messages and as such as indepdendent of any particular audio engine and were
+designed within the context of the [Muses](https://muses-dmi.github.io/) project.
 
-# Dependencies 
+The SVG Interface
+[documentation](https://github.com/muses-dmi/svg-creator/blob/master/docs/interfaces.md)
+provides details of the spefication and how to create them. The tool descibed
+here converts a valid SVG interface to a particular backend's intermediate
+representation. (The backend in question is explictly specified in the input SVG
+interface.)
+
+As noted this tool is part of the larger [Muses](https://muses-dmi.github.io/)
+project and is a component within a larger set of tools for working with SVG
+interfaces.
+
+#  <span style="color:#F3B73B">Dependencies</span> 
 
 The application is written in [Rust](https://www.rust-lang.org/) and tested with
 1.34.1 (and nightly). To install Rust go you need simply to install
 [Rustup](https://rustup.rs/) and if you already have Rust installed, then you can update
 with the command ```rustup update```.
 
-# Building
+#  <span style="color:#F3B73B">Building</span>
 
 To build run the command:
 
@@ -17,7 +31,7 @@ To build run the command:
 cargo build --release
 ```
 
-# Using it
+#  <span style="color:#F3B73B">Using it</span>
 
 To run the application and see its help screen simply run the command
 
@@ -49,7 +63,11 @@ which outputs the following JSON:
 
 The resulting JSON can be pretty printed with a command such as [jsonpp](https://github.com/jmhodges/jsonpp), but in general it would be generated direclty into a file, the comamnd line option ```--json <filename>``` or redirecting ```stdout```.
 
-# More Information
+#  <span style="color:#F3B73B">More Information</span>
+
+Parent project
+
+   - [Muses](https://muses-dmi.github.io/).
 
 Tool and documentation for specification of interfaces as SVGs:
 
@@ -63,7 +81,7 @@ Tools for translating SVG Interfaces to the JSON intermidiate representation and
    - [SVG Sensel Driver](https://github.com/muses-dmi/sensel_osc).
 
 
-# License
+#  <span style="color:#F3B73B">License</span>
 
 The source in this repo is licensed under either of
 
