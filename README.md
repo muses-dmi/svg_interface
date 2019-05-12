@@ -51,11 +51,7 @@ The resulting JSON can be pretty printed with a command such as [jsonpp](https:/
 
 # License
 
-Some of the code for the underlying SVG DSL comes from
-[svg-builder](https://github.com/diagrams/svg-builder), and even in the case of
-changes to those original files its license applies.
-
-Otherwise licensed under either of
+The source in this repo is licensed under either of
 
  * Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
  * MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
