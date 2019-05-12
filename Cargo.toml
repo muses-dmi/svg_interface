@@ -1,0 +1,16 @@
+[package]
+name = "interfaces"
+version = "0.1.0"
+authors = ["Benedict Gaster <benedict.gaster@uwe.ac.uk>"]
+edition = "2018"
+
+[dependencies]
+svg = "0.5.12"
+serde_json = "1.0.39"
+env_logger = "0.6"
+log = "0.4"
+picto = "0.4.3"
+euclid = "0.19.8"
+lyon = "0.13.1"
+usvg = "0.6.1"
+getopts = "0.2"
