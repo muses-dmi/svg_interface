@@ -1,6 +1,6 @@
 # SVG Interface to JSON IR Tool
 
-This repo is part of the larger [Muses](https://muses-dmi.github.io/) project.
+This tool is part of the larger [Muses](https://muses-dmi.github.io/) project.
 
 # Dependencies 
 
