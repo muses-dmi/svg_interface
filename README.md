@@ -49,6 +49,20 @@ which outputs the following JSON:
 
 The resulting JSON can be pretty printed with a command such as [jsonpp](https://github.com/jmhodges/jsonpp), but in general it would be generated direclty into a file, the comamnd line option ```--json <filename>``` or redirecting ```stdout```.
 
+# More Information
+
+Tool and documentation for specification of interfaces as SVGs:
+
+   - [SVG Creator tool](https://github.com/muses-dmi/svg-creator).
+   - [SVG Interface Documentation](https://github.com/muses-dmi/svg-creator/blob/master/docs/interfaces.md).
+
+Tools for translating SVG Interfaces to the JSON intermidiate representation and different backends:
+
+   - [SVG Interface to IR tool](https://github.com/muses-dmi/svg_interface). (This repo.)
+   - [Interface IR to Littlefoot tool](https://github.com/muses-dmi/svg-littlefoot).
+   - [SVG Sensel Driver](https://github.com/muses-dmi/sensel_osc).
+
+
 # License
 
 The source in this repo is licensed under either of
