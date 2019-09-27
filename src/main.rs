@@ -112,6 +112,10 @@ impl Interface {
         r
     }
 
+    pub fn number_ids(&self) -> u32 {
+        self.next_id
+    }
+
     pub fn to_json(&self) -> serde_json::Value {
         json!(self.sensel)
     }
@@ -466,6 +470,9 @@ fn handle_type(tag: &str) -> &str {
         "pad" => {
             "pad"
         },
+        "endless" => {
+            "endless"
+        },
         "none" => {
             "none"
         },
@@ -798,6 +805,24 @@ fn main() {
                             }
                         };
 
+                        let pressure = match attributes.get("pressure") {
+                            Some(pressure) => {
+                                pressure.to_string() == "True"
+                            },
+                            _ => {
+                                false
+                            }
+                        };
+
+                        let with_coords = match attributes.get("with_coords") {
+                            Some(with_coords) => {
+                                with_coords.to_string() == "True"
+                            },
+                            _ => {
+                                false
+                            }
+                        };
+
                         if typ == "vert_slider" || typ == "horz_slider" {
                             let min = (attributes.get(INTERFACE_MIN_ATTR).unwrap() as &str).parse::<u32>().unwrap();
                             let max = (attributes.get(INTERFACE_MAX_ATTR).unwrap() as &str).parse::<u32>().unwrap();
@@ -808,18 +833,42 @@ fn main() {
                                 "address" : msg,
                                 "min" : min,
                                 "max" : max,
-                                "rgb" : rgb
+                                "rgb" : rgb,
+                                "pressure": pressure,
+                                "generate_coords": with_coords,
                             });
 
                             controllers.push(rect);
                         } 
                         else { 
+                            let generate_move = match attributes.get("with_move") {
+                                Some(with_move) => {
+                                    with_move.to_string() == "True"
+                                },
+                                _ => {
+                                    false
+                                }
+                            };
+
+                            let generate_end = match attributes.get("with_end") {
+                                Some(with_end) => {
+                                    with_end.to_string() == "True"
+                                },
+                                _ => {
+                                    false
+                                }
+                            };
+
                             let rect = json!({
                                 "id": id,
                                 "type_id": typ,
                                 "args" : args_json,
                                 "address" : msg,
-                                "rgb": rgb
+                                "rgb": rgb,
+                                "pressure": pressure,
+                                "generate_move": generate_move,
+                                "generate_end": generate_end,
+                                "generate_coords": with_coords,
                             });
 
                             controllers.push(rect);
