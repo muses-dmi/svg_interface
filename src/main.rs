@@ -796,6 +796,29 @@ fn main() {
                             }
                         }
 
+                        let mut args_onoff = vec![];
+                        match attributes.get("on") {
+                            Some(value) => {
+                                let arg = handle_argument(value);
+                                if arg != serde_json::Value::Null {
+                                    args_onoff.push(arg);
+                                }
+                                match attributes.get("off") {
+                                    Some(value) => {
+                                        let arg = handle_argument(value);
+                                        if arg != serde_json::Value::Null {
+                                            args_onoff.push(arg);
+                                        }
+                                    },
+                                    _ => {
+                                    }
+                                };
+                            },
+                            _ => {
+                            }
+                        };
+
+
                         let rgb = match attributes.get("fill") {
                             Some(fill) => {
                                 fill
@@ -859,19 +882,40 @@ fn main() {
                                 }
                             };
 
-                            let rect = json!({
-                                "id": id,
-                                "type_id": typ,
-                                "args" : args_json,
-                                "address" : msg,
-                                "rgb": rgb,
-                                "pressure": pressure,
-                                "generate_move": generate_move,
-                                "generate_end": generate_end,
-                                "generate_coords": with_coords,
-                            });
+                            if args_onoff.len() == 2 && typ == "pad" {
+                                let rect = json!({
+                                    "id": id,
+                                    "type_id": "dpad",
+                                    "args" : args_json,
+                                    "address" : msg,
+                                    "rgb": rgb,
+                                    "pressure": pressure,
+                                    "generate_move": generate_move,
+                                    "generate_end": generate_end,
+                                    "generate_coords": with_coords,
+                                    "on": args_onoff[0],
+                                    "off": args_onoff[1],
+                                });
 
-                            controllers.push(rect);
+                                controllers.push(rect);
+                            }
+                            else {
+                                let rect = json!({
+                                    "id": id,
+                                    "type_id": typ,
+                                    "args" : args_json,
+                                    "address" : msg,
+                                    "rgb": rgb,
+                                    "pressure": pressure,
+                                    "generate_move": generate_move,
+                                    "generate_end": generate_end,
+                                    "generate_coords": with_coords,
+                                });
+
+                                controllers.push(rect);
+                            }
+
+                            
                         }
 
                         
@@ -956,14 +1000,52 @@ fn main() {
                                 }
                             }
 
-                            let circle = json!({
-                                "id": id,
-                                "type_id": typ,
-                                "args" : args_json,
-                                "address" : msg
-                            });
+                            let mut args_onoff = vec![];
+                            match attributes.get("on") {
+                                Some(value) => {
+                                    let arg = handle_argument(value);
+                                    if arg != serde_json::Value::Null {
+                                        args_onoff.push(arg);
+                                    }
+                                    match attributes.get("off") {
+                                        Some(value) => {
+                                            let arg = handle_argument(value);
+                                            if arg != serde_json::Value::Null {
+                                                args_onoff.push(arg);
+                                            }
+                                        },
+                                        _ => {
+                                        }
+                                    };
+                                },
+                                _ => {
+                                }
+                            };
 
-                            controllers.push(circle);
+                            // TODO: all this code refactoring...
+                            if args_onoff.len() == 2 && typ == "pad" {
+                                let circle = json!({
+                                    "id": id,
+                                    "type_id": "dpad",
+                                    "args" : args_json,
+                                    "address" : msg,
+                                    "on": args_onoff[0],
+                                    "off": args_onoff[1],
+                                });
+
+                                controllers.push(circle);
+                            }
+                            else {
+
+                                let circle = json!({
+                                    "id": id,
+                                    "type_id": typ,
+                                    "args" : args_json,
+                                    "address" : msg
+                                });
+
+                                controllers.push(circle);
+                            }
                         }
                 }
             },
